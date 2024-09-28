@@ -19,6 +19,7 @@ public class UserEntity implements SuperEntity {
     @Column(unique = true)
     private String email;
     private String password;
+    @Column(columnDefinition = "LONGTEXT")
     private String profilePic;
     @OneToMany(mappedBy = "user")
     private List<NoteEntity> noteId;

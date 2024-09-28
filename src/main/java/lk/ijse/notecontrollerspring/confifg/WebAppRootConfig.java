@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages = "lk.ijse.notecontrollerspring")
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "lk.ijse.notecontrollerspring.dao")
 @EnableTransactionManagement
 public class WebAppRootConfig {
     @Bean
