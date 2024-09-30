@@ -1,8 +1,11 @@
 package lk.ijse.notecontrollerspring.Service.Impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.notecontrollerspring.CustomeStatusCodes.SelectedUserErrorStatus;
+import lk.ijse.notecontrollerspring.Exceptions.DataPersistentException;
 import lk.ijse.notecontrollerspring.Service.UserService;
 import lk.ijse.notecontrollerspring.dao.UserDao;
+import lk.ijse.notecontrollerspring.dto.UserStatus;
 import lk.ijse.notecontrollerspring.dto.impl.UserDto;
 import lk.ijse.notecontrollerspring.entity.Impl.UserEntity;
 import lk.ijse.notecontrollerspring.util.Mapping;
@@ -16,18 +19,18 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private Mapping mapping;
 
+    @Autowired
+    private UserDao userDao;
+
     @Override
-    public UserDto saveUser(UserDto userDto) {
-        return mapping.toUserDto(
-                userDao.save(
-                        mapping.toUserEntity(userDto)
-                )
-        );
+    public void saveUser(UserDto userDto) {
+        UserEntity savedUser =
+                userDao.save(mapping.toUserEntity(userDto));
+        if (savedUser == null) {
+            throw new DataPersistentException("User not saved");
+        }
     }
 
     @Override
@@ -37,9 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(String userId) {
-        UserEntity selectedUser = userDao.getReferenceById(userId);
-        return mapping.toUserDto(selectedUser);
+    public UserStatus getUser(String userId) {
+        if(userDao.existsById(userId)){
+            UserEntity selectedUser = userDao.getReferenceById(userId);
+            return mapping.toUserDto(selectedUser);
+        }else {
+            return new SelectedUserErrorStatus(2, "User with id " + userId + " not found");
+        }
     }
 
     @Override
@@ -50,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(String userId, UserDto userDto) {
         Optional<UserEntity> tmpUser = userDao.findById(userId);
-        if (tmpUser.isPresent()) {
+        if(tmpUser.isPresent()) {
             tmpUser.get().setFirstName(userDto.getFirstName());
             tmpUser.get().setLastName(userDto.getLastName());
             tmpUser.get().setEmail(userDto.getEmail());
