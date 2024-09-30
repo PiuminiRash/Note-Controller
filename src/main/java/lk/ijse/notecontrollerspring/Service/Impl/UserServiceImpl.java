@@ -4,11 +4,13 @@ import jakarta.transaction.Transactional;
 import lk.ijse.notecontrollerspring.Service.UserService;
 import lk.ijse.notecontrollerspring.dao.UserDao;
 import lk.ijse.notecontrollerspring.dto.impl.UserDto;
+import lk.ijse.notecontrollerspring.entity.Impl.UserEntity;
 import lk.ijse.notecontrollerspring.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,21 +32,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAllUsers() {
-        return List.of();
+        List<UserEntity> allUsers = userDao.findAll();
+        return mapping.asUserDtoList(allUsers);
     }
 
     @Override
     public UserDto getUser(String userId) {
-        return null;
+        UserEntity selectedUser = userDao.getReferenceById(userId);
+        return mapping.toUserDto(selectedUser);
     }
 
     @Override
-    public boolean deleteUser(String userId) {
-        return false;
+    public void deleteUser(String userId) {
+        userDao.deleteById(userId);
     }
 
     @Override
-    public boolean updateUser(String userId, UserDto userDto) {
-        return false;
+    public void updateUser(String userId, UserDto userDto) {
+        Optional<UserEntity> tmpUser = userDao.findById(userId);
+        if (tmpUser.isPresent()) {
+            tmpUser.get().setFirstName(userDto.getFirstName());
+            tmpUser.get().setLastName(userDto.getLastName());
+            tmpUser.get().setEmail(userDto.getEmail());
+            tmpUser.get().setPassword(userDto.getPassword());
+            tmpUser.get().setProfilePic(userDto.getProfilePic());
+        }
     }
 }

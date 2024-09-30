@@ -15,6 +15,6 @@ public class UserDto implements SuperDto {
     private String lastName;
     private String email;
     private String password;
-    private MultipartFile profilePic;
+    private String profilePic;
     private List<NoteDto> noteId;
 }
