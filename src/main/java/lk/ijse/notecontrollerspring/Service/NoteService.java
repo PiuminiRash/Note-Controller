@@ -1,14 +1,14 @@
 package lk.ijse.notecontrollerspring.Service;
 
 import lk.ijse.notecontrollerspring.dto.impl.NoteDto;
+import lk.ijse.notecontrollerspring.dto.impl.NoteStatus;
 
 import java.util.List;
 
 public interface NoteService {
-    NoteDto saveNote(NoteDto noteDto);
+    void saveNote(NoteDto noteDto);
     List<NoteDto> getAllNotes();
-    NoteDto getNote(String noteId);
-    NoteDto SelectId();
+    NoteStatus getNote(String noteId);
     void deleteNote(String noteId);
-    void updateNote(String noteId, NoteDto noteDto);
+    boolean updateNote(String noteId, NoteDto noteDto);
 }

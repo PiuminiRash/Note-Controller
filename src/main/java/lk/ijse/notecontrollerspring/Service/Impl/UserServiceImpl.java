@@ -1,8 +1,9 @@
 package lk.ijse.notecontrollerspring.Service.Impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.notecontrollerspring.CustomeStatusCodes.SelectedUserErrorStatus;
+import lk.ijse.notecontrollerspring.CustomeStatusCodes.SelectedUserAndNoteErrorStatus;
 import lk.ijse.notecontrollerspring.Exceptions.DataPersistentException;
+import lk.ijse.notecontrollerspring.Exceptions.UserNotFoundException;
 import lk.ijse.notecontrollerspring.Service.UserService;
 import lk.ijse.notecontrollerspring.dao.UserDao;
 import lk.ijse.notecontrollerspring.dto.UserStatus;
@@ -45,13 +46,18 @@ public class UserServiceImpl implements UserService {
             UserEntity selectedUser = userDao.getReferenceById(userId);
             return mapping.toUserDto(selectedUser);
         }else {
-            return new SelectedUserErrorStatus(2, "User with id " + userId + " not found");
+            return new SelectedUserAndNoteErrorStatus(2, "User with id " + userId + " not found");
         }
     }
 
     @Override
     public void deleteUser(String userId) {
-        userDao.deleteById(userId);
+        Optional<UserEntity> existUser = userDao.findById(userId);
+        if (!existUser.isPresent()) {
+            throw new UserNotFoundException("user with id " + userId + "not found");
+        } else {
+            userDao.deleteById(userId);
+        }
     }
 
     @Override

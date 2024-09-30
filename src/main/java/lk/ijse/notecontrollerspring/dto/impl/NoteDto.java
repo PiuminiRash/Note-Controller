@@ -5,7 +5,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoteDto implements SuperDto {
+public class NoteDto implements NoteStatus {
     private String noteId;
     private String noteTitle;
     private String noteDesc;
