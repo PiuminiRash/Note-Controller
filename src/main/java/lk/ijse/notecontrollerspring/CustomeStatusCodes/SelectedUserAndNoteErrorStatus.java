@@ -13,4 +13,3 @@ public class SelectedUserAndNoteErrorStatus implements UserStatus , NoteStatus {
     private int statusCode;
     private String status;
 }
-
