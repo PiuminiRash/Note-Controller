@@ -1,4 +1,4 @@
-package lk.ijse.notecontrollerspring.dto.impl;
+package lk.ijse.notecontrollerspring.dto;
 
 import lk.ijse.notecontrollerspring.dto.SuperDto;
 

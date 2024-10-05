@@ -1,7 +1,7 @@
 package lk.ijse.notecontrollerspring.CustomeStatusCodes;
 
 import lk.ijse.notecontrollerspring.dto.UserStatus;
-import lk.ijse.notecontrollerspring.dto.impl.NoteStatus;
+import lk.ijse.notecontrollerspring.dto.NoteStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

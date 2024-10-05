@@ -5,7 +5,7 @@ import lk.ijse.notecontrollerspring.Exceptions.DataPersistentException;
 import lk.ijse.notecontrollerspring.Exceptions.NoteNotFoundException;
 import lk.ijse.notecontrollerspring.Service.NoteService;
 import lk.ijse.notecontrollerspring.dto.impl.NoteDto;
-import lk.ijse.notecontrollerspring.dto.impl.NoteStatus;
+import lk.ijse.notecontrollerspring.dto.NoteStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

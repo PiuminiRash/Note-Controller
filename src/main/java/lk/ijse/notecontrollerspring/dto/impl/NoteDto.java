@@ -1,6 +1,6 @@
 package lk.ijse.notecontrollerspring.dto.impl;
 
-import lk.ijse.notecontrollerspring.dto.SuperDto;
+import lk.ijse.notecontrollerspring.dto.NoteStatus;
 import lombok.*;
 @Data
 @AllArgsConstructor

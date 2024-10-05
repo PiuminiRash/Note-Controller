@@ -7,7 +7,7 @@ import lk.ijse.notecontrollerspring.Exceptions.NoteNotFoundException;
 import lk.ijse.notecontrollerspring.Service.NoteService;
 import lk.ijse.notecontrollerspring.dao.NoteDao;
 import lk.ijse.notecontrollerspring.dto.impl.NoteDto;
-import lk.ijse.notecontrollerspring.dto.impl.NoteStatus;
+import lk.ijse.notecontrollerspring.dto.NoteStatus;
 import lk.ijse.notecontrollerspring.entity.Impl.NoteEntity;
 import lk.ijse.notecontrollerspring.util.AppUtil;
 import lk.ijse.notecontrollerspring.util.Mapping;

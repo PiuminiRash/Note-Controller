@@ -1,7 +1,7 @@
 package lk.ijse.notecontrollerspring.Service;
 
 import lk.ijse.notecontrollerspring.dto.impl.NoteDto;
-import lk.ijse.notecontrollerspring.dto.impl.NoteStatus;
+import lk.ijse.notecontrollerspring.dto.NoteStatus;
 
 import java.util.List;
 
